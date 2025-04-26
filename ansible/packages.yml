@@ -1,0 +1,23 @@
+dev_packages_common:
+  - neovim
+
+dev_packages_ubuntu:
+  - 
+
+dev_packages_fedora:
+  - 
+
+dev_packages_nix:
+  - 
+
+dev_packages_macos:
+  - 
+
+extra_packages_common:
+  - 
+
+extra_packages_windows:
+  - 
+
+extra_packages_ubuntu:
+  -

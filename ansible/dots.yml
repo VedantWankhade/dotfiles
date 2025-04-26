@@ -1,0 +1,3 @@
+dots_common:
+  - src: "nvim/"
+    dest: ".config/nvim/"

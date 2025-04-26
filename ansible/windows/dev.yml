@@ -1,0 +1,19 @@
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+  become: true
+
+- name: Install development packages on WSL
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ dev_packages_common + dev_packages_ubuntu }}"
+  become: true
+  ignore_errors: yes
+  register: package_result
+
+- name: Warning about missing packages
+  ansible.builtin.debug:
+    msg: "Package {{ item }} could not be installed"
+  loop: "{{ package_result.results | selectattr('failed', 'eq', true) | map(attribute='item') | list }}"
+  when: package_result.results | selectattr('failed', 'eq', true) | list | length > 0
