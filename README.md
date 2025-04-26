@@ -11,3 +11,7 @@ Thats it for linux distros and macos. For windows, install windows native gui so
 - [ ] Use tags 
 - [ ] Windows native apps
 - [ ] Nix / Home manager integration
+
+## Extending
+- To install additional packages, just mention them in `ansible/packages.yml` under appropriate var.
+- To add more dotfiles, just place them in the root directory of this repo, and declare its destination in `ansible/dots.yml`.
