@@ -17,3 +17,21 @@
     msg: "Package {{ item }} could not be installed"
   loop: "{{ package_result.results | selectattr('failed', 'eq', true) | map(attribute='item') | list }}"
   when: package_result.results | selectattr('failed', 'eq', true) | list | length > 0
+
+- name: Check if Nix is already installed
+  command: which nix-env
+  register: nix_installed
+  ignore_errors: true
+
+- name: Install Nix Package Manager
+  shell: curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+  when: nix_installed.rc != 0
+
+
+- name: Source Nix profile to update environment
+  shell: . {{ansible_env.HOME}}/.nix-profile/etc/profile.d/nix.sh
+  when: nix_installed.rc != 0
+
+- name: Install Neovim using Nix
+  shell:
+    nix-env -iA nixpkgs.neovim

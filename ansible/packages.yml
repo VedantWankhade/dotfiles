@@ -1,8 +1,10 @@
 dev_packages_common:
-  - neovim
+  - git
 
 dev_packages_ubuntu:
-  - 
+  - luarocks
+  - golang
+  - gopls
 
 dev_packages_fedora:
   - 
