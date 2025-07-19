@@ -1,10 +1,24 @@
 dev_packages_common:
   - git
+  - neovim
 
 dev_packages_ubuntu:
   - luarocks
   - golang
   - gopls
+ 
+dev_packages_arch:
+  - go
+  - gopls
+  - visual-studio-code-bin
+  - luarocks
+  - zen-browser-bin
+  - bluez
+  - bluez-utils
+  - blueman
+  - pavucontrol
+  - brightnessctl
+  - playerctl
 
 dev_packages_fedora:
   - 

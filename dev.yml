@@ -13,6 +13,14 @@
       when:
         - ansible_facts['virtualization_type'] == "wsl"
 
+    - name: Install packages for Arch Linux
+      include_tasks: ansible/arch/dev.yml
+      when:
+      - ansible_facts['os_family'] == "Archlinux" or ansible_facts['distribution'] == "Arch"
+
+    - name: Perform common config tasks
+      include_tasks: ansible/common/dev.yml
+
     - name: Setup dotfiles
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/{{ item.src }}"

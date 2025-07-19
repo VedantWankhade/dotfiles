@@ -1,0 +1,47 @@
+- name: Check if yay is installed
+  command: which yay
+  register: yay_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install prerequisites
+  become: yes   
+  pacman:
+    name:
+      - git
+      - base-devel
+    state: present
+    update_cache: yes
+  when: yay_check.rc != 0
+
+- name: Clone yay from AUR
+  git:
+    repo: "https://aur.archlinux.org/yay.git"
+    dest: /home/vedant/.cache/yay
+    clone: yes
+    update: no
+  when: yay_check.rc != 0
+
+- name: Build and install yay
+  command: makepkg -si --noconfirm
+  args:
+    chdir: /home/vedant/.cache/yay
+  when: yay_check.rc != 0
+
+- name: Install AUR packages using yay
+  shell: yay -S --noconfirm --needed {{ item }}
+  loop: "{{ dev_packages_common + dev_packages_arch }}"
+  ignore_errors: yes
+  register: package_result
+
+- name: Warning about missing packages
+  ansible.builtin.debug:
+    msg: "Package {{ item }} could not be installed"
+  loop: "{{ package_result.results | selectattr('failed', 'eq', true) | map(attribute='item') | list }}"
+  when: package_result.results | selectattr('failed', 'eq', true) | list | length > 0
+
+- name: Ensure bluetooth.service is enabled and running
+  ansible.builtin.systemd:
+    name: bluetooth
+    enabled: true
+    state: started
