@@ -1,3 +1,6 @@
+# make sure to have / at the end of src to only copy contents from "within" it
 dots_common:
   - src: "nvim/"
     dest: ".config/nvim/"
+  - src: "hypr/"
+    dest: ".config/hypr/"

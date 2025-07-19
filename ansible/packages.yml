@@ -19,6 +19,14 @@ dev_packages_arch:
   - pavucontrol
   - brightnessctl
   - playerctl
+  - syncthing
+  - fuse
+  - kitty
+  - dolphin
+  - ark
+  - wofi
+  - superproductivity-bin
+  - spotify
 
 dev_packages_fedora:
   - 

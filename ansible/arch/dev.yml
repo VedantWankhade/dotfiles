@@ -45,3 +45,40 @@
     name: bluetooth
     enabled: true
     state: started
+
+- name: Ensure syncthing is running and enabled
+  ansible.builtin.systemd:
+    name: syncthing@vedant
+    enabled: true
+    state: started
+
+
+- name: Create Apps directory
+  file:
+    path: /home/vedant/Apps
+    state: directory
+    mode: '0755'
+
+- name: Check if Logseq is already installed
+  stat:
+    path: /home/vedant/Apps/Logseq.AppImage
+  register: logseq_installed
+
+- name: Download Logseq if not present
+  get_url:
+    url: https://github.com/logseq/logseq/releases/download/0.10.12/Logseq-linux-x64-0.10.12.AppImage
+    dest: /home/vedant/Apps/Logseq.AppImage
+    mode: '0755'
+  when: not logseq_installed.stat.exists
+
+- name: (Optional) Create symlink to /usr/local/bin
+  become: yes
+  file:
+    src: /home/vedant/Apps/Logseq.AppImage
+    dest: /usr/local/bin/logseq
+    state: link
+
+- name: Add read/write permissions to /opt/spotify and /opt/spotify/Apps recursively
+  ansible.builtin.command: >
+    bash -c "chmod a+wr /opt/spotify && chmod -R a+wr /opt/spotify/Apps"
+  become: yes
