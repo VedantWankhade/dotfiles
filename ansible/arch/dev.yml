@@ -52,6 +52,11 @@
     enabled: true
     state: started
 
+- name: Ensure sddm is enabled and running
+  ansible.builtin.systemd:
+    name: sddm
+    enabled: true
+    state: started
 
 - name: Create Apps directory
   file:

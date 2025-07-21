@@ -8,34 +8,39 @@ dev_packages_ubuntu:
   - gopls
  
 dev_packages_arch:
-  - go
-  - gopls
-  - visual-studio-code-bin
-  - luarocks
-  - zen-browser-bin
+  - sddm
+  - hyprland
+  - hyprpaper
+  - dunst
+  - xdg-desktop-portal-hyprland
+  - qt5-wayland
+  - qt6-wayland
+  - aylurs-gtk-shell-git
+  - kitty
+  - polkit-kde-agent
   - bluez
   - bluez-utils
   - blueman
   - pavucontrol
   - brightnessctl
   - playerctl
-  - syncthing
   - fuse
-  - kitty
   - dolphin
   - ark
   - wofi
+  - go
+  - gopls
+  - visual-studio-code-bin
+  - luarocks
+  - zen-browser-bin
+  - syncthing
   - superproductivity-bin
   - spotify
-  - hyprland
   - actual-appimage
-  - hyprpaper
-  - kitty
-  - xdg-desktop-portal-hyprland
-  - qt5-wayland
-  - qt6-wayland
-  - polkit-kde-agent
   - qbittorrent
+  - okular
+  - bottles
+  - unrar
 
 dev_packages_fedora:
   - 
