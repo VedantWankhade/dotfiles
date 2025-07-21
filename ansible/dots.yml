@@ -4,3 +4,5 @@ dots_common:
     dest: ".config/nvim/"
   - src: "hypr/"
     dest: ".config/hypr/"
+  - src: "wallpapers/"
+    dest: "Pictures/Wallpapers"

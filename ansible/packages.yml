@@ -27,6 +27,14 @@ dev_packages_arch:
   - wofi
   - superproductivity-bin
   - spotify
+  - hyprland
+  - actual-appimage
+  - hyprpaper
+  - kitty
+  - xdg-desktop-portal-hyprland
+  - qt5-wayland
+  - qt6-wayland
+  - polkit-kde-agent
 
 dev_packages_fedora:
   - 
