@@ -34,6 +34,7 @@ dev_packages:
   - okular
   - bottles
   - unrar
+  - flatpak
 
 extra_packages_ubuntu:
   -
