@@ -1,3 +1,3 @@
-module github.com/vedantwankhade/dotfiles/src/dotfiles
+module github.com/vedantwankhade/dotfiles
 
 go 1.24.5
