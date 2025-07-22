@@ -1,4 +1,4 @@
 # make sure to have / at the end of src to only copy contents from "within" it
 dots:
-  - src: "nvim/"
+  - src: "../../config/nvim/"
     dest: ".config/nvim/"
