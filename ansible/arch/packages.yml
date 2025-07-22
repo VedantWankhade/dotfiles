@@ -1,0 +1,39 @@
+dev_packages:
+  - git
+  - neovim
+  - sddm
+  - hyprland
+  - hyprpaper
+  - dunst
+  - xdg-desktop-portal-hyprland
+  - qt5-wayland
+  - qt6-wayland
+  - aylurs-gtk-shell-git
+  - kitty
+  - polkit-kde-agent
+  - bluez
+  - bluez-utils
+  - blueman
+  - pavucontrol
+  - brightnessctl
+  - playerctl
+  - fuse
+  - dolphin
+  - ark
+  - wofi
+  - go
+  - gopls
+  - visual-studio-code-bin
+  - luarocks
+  - zen-browser-bin
+  - syncthing
+  - superproductivity-bin
+  - spotify
+  - actual-appimage
+  - qbittorrent
+  - okular
+  - bottles
+  - unrar
+
+extra_packages_ubuntu:
+  -

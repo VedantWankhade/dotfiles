@@ -1,0 +1,6 @@
+dev_packages:
+  - luarocks
+  - golang
+  - git
+  - neovim
+  - gopls
