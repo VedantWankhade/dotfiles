@@ -1,8 +1,12 @@
 # make sure to have / at the end of src to only copy contents from "within" it
-dots:
+dev_dots:
   - src: "../../config/nvim/"
     dest: ".config/nvim/"
+
+hyprland_dots:
   - src: "../../config/hypr/"
     dest: ".config/hypr/"
+  - src: "../../config/kitty/"
+    dest: ".config/kitty/"
   - src: "../../asset/wallpapers/"
     dest: "Pictures/Wallpapers"

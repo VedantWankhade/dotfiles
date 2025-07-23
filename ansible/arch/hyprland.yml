@@ -1,0 +1,76 @@
+- name: Setting up hyprland profile for Arch Linux
+  hosts: localhost
+  gather_facts: true
+  become: false
+
+  vars_files:
+    - packages.yml
+    - dots.yml
+
+  tasks:
+  - name: Perform common prerequisite tasks
+    include_tasks: ./common.yml
+
+  - name: Install AUR packages using yay
+    shell: yay -S --noconfirm --needed {{ item }}
+    loop: "{{ hyprland_packages }}"
+    ignore_errors: yes
+    register: package_result
+
+  - name: Warning about missing packages
+    ansible.builtin.debug:
+      msg: "Package {{ item }} could not be installed"
+    loop: "{{ package_result.results | selectattr('failed', 'eq', true) | map(attribute='item') | list }}"
+    when: package_result.results | selectattr('failed', 'eq', true) | list | length > 0
+
+  - name: Ensure bluetooth.service is enabled and running
+    ansible.builtin.systemd:
+      name: bluetooth
+      enabled: true
+      state: started
+
+  - name: Ensure syncthing is running and enabled
+    ansible.builtin.systemd:
+      name: syncthing@vedant
+      enabled: true
+      state: started
+
+  - name: Ensure sddm is enabled and running
+    ansible.builtin.systemd:
+      name: sddm
+      enabled: true
+      state: started
+
+  - name: Check if Logseq is already installed
+    stat:
+      path: /home/vedant/Apps/Logseq.AppImage
+    register: logseq_installed
+
+  - name: Download Logseq if not present
+    get_url:
+      url: https://github.com/logseq/logseq/releases/download/0.10.12/Logseq-linux-x64-0.10.12.AppImage
+      dest: /home/vedant/Apps/Logseq.AppImage
+      mode: '0755'
+    when: not logseq_installed.stat.exists
+
+  - name: (Optional) Create symlink to /usr/local/bin
+    become: yes
+    file:
+      src: /home/vedant/Apps/Logseq.AppImage
+      dest: /usr/local/bin/logseq
+      state: link
+
+  - name: Add read/write permissions to /opt/spotify and /opt/spotify/Apps recursively
+    ansible.builtin.command: >
+      bash -c "chmod a+wr /opt/spotify && chmod -R a+wr /opt/spotify/Apps"
+    become: yes
+
+  - name: Setup dotfiles
+    ansible.builtin.copy:
+      src: "{{ playbook_dir }}/{{ item.src }}"
+      dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
+      owner: "{{ ansible_user_id }}"
+      group: "{{ ansible_user_id }}"
+      mode: '0755'
+    loop: "{{ hyprland_dots }}"
+    when: item.src is defined and item.dest is defined

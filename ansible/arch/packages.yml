@@ -1,6 +1,14 @@
 dev_packages:
   - git
   - neovim
+  - aylurs-gtk-shell-git
+  - go
+  - gopls
+  - visual-studio-code-bin
+  - luarocks
+
+hyprland_packages:
+  - kitty
   - sddm
   - hyprland
   - hyprpaper
@@ -8,8 +16,6 @@ dev_packages:
   - xdg-desktop-portal-hyprland
   - qt5-wayland
   - qt6-wayland
-  - aylurs-gtk-shell-git
-  - kitty
   - polkit-kde-agent
   - bluez
   - bluez-utils
@@ -21,10 +27,6 @@ dev_packages:
   - dolphin
   - ark
   - wofi
-  - go
-  - gopls
-  - visual-studio-code-bin
-  - luarocks
   - zen-browser-bin
   - syncthing
   - superproductivity-bin
@@ -35,6 +37,3 @@ dev_packages:
   - bottles
   - unrar
   - flatpak
-
-extra_packages_ubuntu:
-  -

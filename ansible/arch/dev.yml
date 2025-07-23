@@ -8,35 +8,8 @@
     - dots.yml
 
   tasks:
-  - name: Check if yay is installed
-    command: which yay
-    register: yay_check
-    ignore_errors: yes
-    changed_when: false
-
-  - name: Install prerequisites
-    become: yes   
-    pacman:
-      name:
-        - git
-        - base-devel
-      state: present
-      update_cache: yes
-    when: yay_check.rc != 0
-
-  - name: Clone yay from AUR
-    git:
-      repo: "https://aur.archlinux.org/yay.git"
-      dest: /home/vedant/.cache/yay
-      clone: yes
-      update: no
-    when: yay_check.rc != 0
-
-  - name: Build and install yay
-    command: makepkg -si --noconfirm
-    args:
-      chdir: /home/vedant/.cache/yay
-    when: yay_check.rc != 0
+  - name: Perform common prerequisite tasks
+    include_tasks: ./common.yml
 
   - name: Install AUR packages using yay
     shell: yay -S --noconfirm --needed {{ item }}
@@ -50,57 +23,13 @@
     loop: "{{ package_result.results | selectattr('failed', 'eq', true) | map(attribute='item') | list }}"
     when: package_result.results | selectattr('failed', 'eq', true) | list | length > 0
 
-  - name: Ensure bluetooth.service is enabled and running
-    ansible.builtin.systemd:
-      name: bluetooth
-      enabled: true
-      state: started
+  - name: Set Git user.name
+    ansible.builtin.command:
+      cmd: git config --global user.name "Vedant Wankhade"
 
-  - name: Ensure syncthing is running and enabled
-    ansible.builtin.systemd:
-      name: syncthing@vedant
-      enabled: true
-      state: started
-
-  - name: Ensure sddm is enabled and running
-    ansible.builtin.systemd:
-      name: sddm
-      enabled: true
-      state: started
-
-  - name: Create Apps directory
-    file:
-      path: /home/vedant/Apps
-      state: directory
-      mode: '0755'
-
-  - name: Check if Logseq is already installed
-    stat:
-      path: /home/vedant/Apps/Logseq.AppImage
-    register: logseq_installed
-
-  - name: Download Logseq if not present
-    get_url:
-      url: https://github.com/logseq/logseq/releases/download/0.10.12/Logseq-linux-x64-0.10.12.AppImage
-      dest: /home/vedant/Apps/Logseq.AppImage
-      mode: '0755'
-    when: not logseq_installed.stat.exists
-
-  - name: (Optional) Create symlink to /usr/local/bin
-    become: yes
-    file:
-      src: /home/vedant/Apps/Logseq.AppImage
-      dest: /usr/local/bin/logseq
-      state: link
-
-  - name: Add read/write permissions to /opt/spotify and /opt/spotify/Apps recursively
-    ansible.builtin.command: >
-      bash -c "chmod a+wr /opt/spotify && chmod -R a+wr /opt/spotify/Apps"
-    become: yes
-
-
-  - name: Perform common config tasks
-    include_tasks: ../common/dev.yml
+  - name: Set Git user.email
+    ansible.builtin.command:
+      cmd: git config --global user.email "vedantwankhade17@gmail.com"
 
   - name: Setup dotfiles
     ansible.builtin.copy:
@@ -109,5 +38,5 @@
       owner: "{{ ansible_user_id }}"
       group: "{{ ansible_user_id }}"
       mode: '0755'
-    loop: "{{ dots }}"
+    loop: "{{ dev_dots }}"
     when: item.src is defined and item.dest is defined

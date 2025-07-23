@@ -1,0 +1,35 @@
+  - name: Check if yay is installed
+    command: which yay
+    register: yay_check
+    ignore_errors: yes
+    changed_when: false
+
+  - name: Install prerequisites
+    become: yes   
+    pacman:
+      name:
+        - git
+        - base-devel
+      state: present
+      update_cache: yes
+    when: yay_check.rc != 0
+
+  - name: Clone yay from AUR
+    git:
+      repo: "https://aur.archlinux.org/yay.git"
+      dest: /home/vedant/.cache/yay
+      clone: yes
+      update: no
+    when: yay_check.rc != 0
+
+  - name: Build and install yay
+    command: makepkg -si --noconfirm
+    args:
+      chdir: /home/vedant/.cache/yay
+    when: yay_check.rc != 0
+
+  - name: Create Apps directory
+    file:
+      path: /home/vedant/Apps
+      state: directory
+      mode: '0755'
