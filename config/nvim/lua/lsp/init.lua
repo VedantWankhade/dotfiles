@@ -31,3 +31,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+vim.diagnostic.config({
+  virtual_text = true,  -- shows inline error/warning text
+  signs = true,         -- shows icons in gutter
+  underline = true,     -- underlines problems
+  update_in_insert = false, -- don’t show diagnostics while typing
+  severity_sort = true,     -- sorts diagnostics by severity
+})
