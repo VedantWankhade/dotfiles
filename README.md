@@ -20,4 +20,10 @@ Dotfiles and ansible playbook for my windows, mac and linux workstations (and my
   - Switch to specific window (or open the program if not running) on keybind
 
 > [!IMPORTANT]  
-> Use ansible-core v2.18.* as v2.19.* has issues with reading sudo password from tty stdin as of 27/07/2025.
+> Use ansible-core v2.18.*
+> v2.19.* has issues with reading sudo password from tty stdin as of 27/07/2025.
+
+> [!IMPORTANT]
+> Turns out there are some breaking changes with ansible-core v2.19.0. 
+> > Task Execution / Forks - Forks no longer inherit stdio from the parent ansible-playbook process. stdout, stderr, and stdin within a worker are detached from the terminal, and non-functional. All needs to access stdio from a fork for controller side plugins requires use of Display - 
+> https://github.com/ansible/ansible/blob/v2.19.0/changelogs/CHANGELOG-v2.19.rst#major-changes
