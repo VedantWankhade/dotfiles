@@ -18,3 +18,6 @@ Dotfiles and ansible playbook for my windows, mac and linux workstations (and my
 - Profile choices (like Hyprland, DWM, KDE, Dev etc)
 - Hyprland
   - Switch to specific window (or open the program if not running) on keybind
+
+> [!IMPORTANT]  
+> Use ansible-core v2.18.* as v2.19.* has issues with reading sudo password from tty stdin as of 27/07/2025.
