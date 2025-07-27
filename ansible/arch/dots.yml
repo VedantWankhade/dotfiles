@@ -2,11 +2,11 @@
 dev_dots:
   - src: "../../config/nvim/"
     dest: ".config/nvim/"
+  - src: "../../config/kitty/"
+    dest: ".config/kitty/"
 
 hyprland_dots:
   - src: "../../config/hypr/"
     dest: ".config/hypr/"
-  - src: "../../config/kitty/"
-    dest: ".config/kitty/"
   - src: "../../asset/wallpapers/"
     dest: "Pictures/Wallpapers"

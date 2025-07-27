@@ -6,6 +6,7 @@ dev_packages:
   - gopls
   - visual-studio-code-bin
   - luarocks
+  - maplemono-ttf
 
 hyprland_packages:
   - kitty
