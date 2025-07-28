@@ -7,9 +7,10 @@ dev_packages:
   - visual-studio-code-bin
   - luarocks
   - maplemono-ttf
+  - tmux
+  - kitty
 
 hyprland_packages:
-  - kitty
   - sddm
   - hyprland
   - hyprpaper
