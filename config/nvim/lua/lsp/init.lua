@@ -1,8 +1,18 @@
 local lspconfig = require('lspconfig')
 
 lspconfig.gopls.setup({
-  on_attach = function(client, bufnr)
-    -- Organize imports before saving
+      on_attach = function(client, bufnr)
+    
+    -- Format and organize imports
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ async = false })  -- format code
+        -- organize imports (as above)
+      end,
+    })
+    
+        -- Organize imports before saving
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       callback = function()
@@ -23,17 +33,6 @@ lspconfig.gopls.setup({
   end,
 })
 
--- Format and organize imports
-vim.api.nvim_create_autocmd("BufWritePre", {
-  buffer = bufnr,
-  callback = function()
-    vim.lsp.buf.format({ async = false })  -- format code
-    -- organize imports (as above)
-  end,
-})
-
-
-vim.lsp.enable('gopls')
 
 vim.diagnostic.config({
   virtual_text = true,  -- shows inline error/warning text
