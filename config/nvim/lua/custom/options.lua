@@ -10,4 +10,5 @@ vim.opt.tabstop = 4         -- keep this at 4 so that editing operations like us
 vim.opt.shiftwidth = 4      -- keep same as softtabstop
 
 vim.opt.scrolloff = 20      -- keep the cursor above 20 lines
-vim.opt.signcolumn = "auto"  -- show symbols and signs in gutter when available - warnings, hints etc from git, lsp or other stuff
+vim.opt.signcolumn = "yes"  -- show symbols and signs in gutter when available - warnings, hints etc from git, lsp or other stuff
+vim.opt.winborder = "rounded"
