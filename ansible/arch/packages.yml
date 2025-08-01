@@ -9,6 +9,8 @@ dev_packages:
   - maplemono-ttf
   - tmux
   - kitty
+  - downgrade
+  - man-db
 
 hyprland_packages:
   - sddm

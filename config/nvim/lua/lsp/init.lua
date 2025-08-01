@@ -1,5 +1,7 @@
 local lspconfig = require('lspconfig')
 
+lspconfig.clangd.setup({})
+
 lspconfig.gopls.setup({
       on_attach = function(client, bufnr)
     
