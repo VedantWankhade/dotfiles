@@ -12,6 +12,7 @@ dev_packages:
   - downgrade
   - man-db
   - ripgrep
+  - wireshark-qt
 
 hyprland_packages:
   - hyprsunset
