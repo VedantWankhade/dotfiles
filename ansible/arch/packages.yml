@@ -11,6 +11,7 @@ dev_packages:
   - kitty
   - downgrade
   - man-db
+  - ripgrep
 
 hyprland_packages:
   - hyprsunset

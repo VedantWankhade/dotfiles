@@ -1,4 +1,5 @@
+vim.g.mapleader = " "
 require("custom/options")
-require("custom/remaps")
 require("lazypm/lazy")
 require("lsp")
+require("custom/remaps")
