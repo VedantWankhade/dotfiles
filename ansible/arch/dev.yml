@@ -23,6 +23,19 @@
     loop: "{{ package_result.results | selectattr('failed', 'eq', true) | map(attribute='item') | list }}"
     when: package_result.results | selectattr('failed', 'eq', true) | list | length > 0
 
+  - name: Ensure wireshark group exists
+    become: yes
+    group:
+      name: wireshark
+      state: present
+
+  - name: Add user to wireshark group
+    become: yes
+    user:
+      name: vedant   
+      groups: wireshark
+      append: yes
+
   - name: Set Git user.name
     ansible.builtin.command:
       cmd: git config --global user.name "Vedant Wankhade"
