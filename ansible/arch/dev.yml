@@ -36,6 +36,25 @@
       groups: wireshark
       append: yes
 
+  - name: Ensure docker group exists
+    become: yes
+    group:
+      name: docker
+      state: present
+
+  - name: Add user to docker group
+    become: yes
+    user:
+      name: vedant   
+      groups: docker
+      append: yes
+ 
+  - name: Ensure docker.socket is enabled and running # alternatively enable docker.service - but that will increase boot time
+    ansible.builtin.systemd:
+      name: docker.socket
+      enabled: true
+      state: started
+
   - name: Set Git user.name
     ansible.builtin.command:
       cmd: git config --global user.name "Vedant Wankhade"

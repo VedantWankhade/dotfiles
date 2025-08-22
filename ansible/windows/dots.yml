@@ -2,3 +2,5 @@
 dots:
   - src: "../../config/nvim/"
     dest: ".config/nvim/"
+  - src: "../../config/tmux/"
+    dest: ".config/tmux/"

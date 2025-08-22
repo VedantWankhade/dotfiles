@@ -4,6 +4,8 @@ dev_dots:
     dest: ".config/nvim/"
   - src: "../../config/kitty/"
     dest: ".config/kitty/"
+  - src: "../../config/tmux/"
+    dest: ".config/tmux/"
 
 hyprland_dots:
   - src: "../../config/hypr/"

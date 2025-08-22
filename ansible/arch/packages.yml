@@ -13,6 +13,7 @@ dev_packages:
   - man-db
   - ripgrep
   - wireshark-qt
+  - docker
 
 hyprland_packages:
   - hyprsunset
